@@ -249,3 +249,127 @@ enum example {
 
 example.up; // -> example.up
 ```
+
+---
+
+## Data Structures
+
+- `String` is immutable
+  - `StringBuffer` contains manipulation methods
+- `List` is an ordered collections of objects
+  - Similar to arrays
+- `Set` is like `list` but each element is unordered and unique
+- `Map` stores data in key-value pairs
+  - Similar to dictionaries and associative arrays
+  - Can serve as trees and graphs
+- `List`, `Map`, and `Set` are iterables
+
+```dart
+var string = "Hello World";
+var list = [1, 2, "Three"];
+var setExample = {5, 4, 3};
+var map = {
+  "test": "example",
+  1: 2,
+};
+```
+
+---
+
+## Abstract Data Types
+
+- `class` defines a class
+  - Constructors
+  - Instance members
+  - Static members
+- `abstract` defines an abstract `class`
+  - Used to make interfaces with the `implements` keyword
+  - Methods do not have a body
+- `extends` can be used to make a class inherit from another
+  - Methods can be overridden with the `@override` metatag
+- `operator` followed by the symbol can override operators
+- Private variables and methods start with an `_` (underscore)
+- Optional variables have a `?` (question mark) after their type
+- `get` and `set` define getters and setters
+- Constructors are methods with the same name as the class
+- `this` accesses instance variables and methods
+
+---
+
+```dart
+abstract class ExampleContainer {
+  void sayHello();
+}
+
+class Example implements ExampleContainer {
+  String name;
+  int? nullableVariable;
+  static double staticVariable = 1.1;
+
+  Example(this.name, this.nullableVariable);  // Constructor
+
+  void sayHello() {
+	print("Hello!");
+  }
+
+  String get greeting {
+	return "My name is: ${this.name}";
+  }
+
+  void set lastName(String lastName) {
+	this.name = "${this.name} ${lastName}";
+  }
+
+  Example operator +(Example second) {
+	return Example(this.name + second.name, second.nullableVariable);
+  }
+}
+```
+
+---
+
+## File Structures
+
+- `File` is constructed with the path to a file on the system
+  - Operations
+    - Opened
+    - Closed
+    - Read
+    - Written
+    - Created
+    - Deleted
+    - Checked for existence
+  - Has convenience methods like `readAsString()`
+    - Synchronous and asynchronous
+- `Stream` is returned when a `File` is read
+  - Can read a `File` line by line
+  - Can be written and appended to
+
+```dart
+File myFile = File('hello.txt');
+if (!myFile.existsSync())
+	myFile.create();
+myFile.readAsString().then((value) {
+	print(value); 
+});
+```
+
+---
+
+# Program-Level Structures
+
+## Character Set
+
+- UTF-16
+
+```dart
+var smile = "😃";
+```
+
+---
+
+## Operators
+
+### Symbols and Meaning
+
+
