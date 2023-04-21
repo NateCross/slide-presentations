@@ -1,8 +1,9 @@
 #!/usr/bin/slides
 ---
-<!-- theme: https://github.com/charmbracelet/glamour/raw/master/styles/pink.json -->
 author: Nathan Angelo B. Cruz
 ---
+<!-- This file is meant to be used with the slides CLI app, but being -->
+<!-- a markdown file, it can simply be read that way -->
 
 # Welcome to Dart
 
@@ -14,6 +15,7 @@ void main() {
   print("Hello ${teacher}!");
 }
 ```
+
 
 ---
 
@@ -194,3 +196,56 @@ with a flexible execution runtime platform for app frameworks
 ---
 
 # Data-Level Structures
+
+## Constants and Variables
+
+- `var`: Initializes a variable; automatically infers type
+- `Type`: Explicitly declares type
+- `final`: Can be set only once; typing is optional
+- `const`: Compile-time constants; typing is optional
+
+Difference between `final` and `const`?
+
+`final` objects may have fields and attributes modified;
+`const` objects may not
+
+```dart
+var variable = 1;
+String hello = "world";
+final arr = [1, 2, 3];
+arr = [4, 5, 6]; // Not possible
+```
+
+---
+
+## Data Types
+
+Everything in Dart is an object, i.e. they implement the `Object` class. The only exception is `null`, which is the only type that is not an object.
+
+The language is soundly typed through static type and runtime checks. Thus, a variable can never be a type it was not annotated or inferred to be.
+
+### Built-in
+
+- Numbers: `int` (integers) and `double` (double-precision floating point)
+- Booleans: `bool` (`true` or `false`)
+
+### Enumerated
+
+- Created through the `enum` keyword
+- Values accessed through the `.` (dot) operator
+- Dart 2.17: Introduced enhanced enums
+  - Supports fields, methods, and constructors like classes
+
+```dart
+var number = 1.5;
+var boolean = true;
+number.ceil(); // -> 2
+boolean.toString(); // -> "true"
+
+enum example {
+  up,
+  down,
+}
+
+example.up; // -> example.up
+```
