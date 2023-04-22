@@ -372,4 +372,439 @@ var smile = "😃";
 
 ### Symbols and Meaning
 
+Boolean | 
+--- | ---
+`\|\|` | or
+`&&` | and
 
+- When using boolean operators, both sides must evaluate to `boolean` or it will cause an error
+
+---
+
+The following groups of operators do not have any set definition
+
+Rather, their purpose is to call the overloaded operator as defined by the class of the object
+
+
+Relational |
+--- |
+`>=` |
+`<=` |
+`<` |
+`>` |
+
+Bitwise |
+--- |
+`^` |
+`&` |
+
+Shift |
+--- |
+`>>` |
+`<<` |
+`>>>` |
+
+---
+
+Additive |
+--- |
+`+` |
+`-` |
+
+Multiplicative |
+--- |
+`*` |
+`/` |
+`%` |
+`~/` |
+
+Unary |
+--- |
+`-` |
+`~` |
+`!` |
+
+Postfix and Prefix |
+--- |
+`++` |
+`--` |
+
+---
+
+```dart
+void main() {
+  if (false || true) {
+    print("True!"); // -> True!
+  } else {
+    print("False!");  // This block is unreachable
+  }
+
+  print("Hello " + "World!");  // -> Hello World!
+}
+```
+
+---
+
+### Rules of Precedence
+
+| Description    | Operator                           | Associativity | Precedence |
+| -------------- | ---------------------------------- | ------------- | ---------- |
+| Unary postfix  | e., e?., e++, e–, e1[e2], e()      | None          | 16         |
+| Unary prefix   | -e, !e, ~e, ++e, await e           | None          | 15         |
+| Multiplicative | *, /, ~/, %                        | Left          | 14         |
+| Additive       | +, -                               | Left          | 13         |
+| Shift          | <<, >>, >>>                        | Left          | 12         |
+| Bitwise AND    | &                                  | Left          | 11         |
+| Bitwise XOR    | ^                                  | Left          | 10         |
+| Bitwise OR     | `\|`                                 | Left          | 9          |
+| Relational     | <, >, <=, >=, as, is, is!          | None          | 8          |
+| Equality       | ==, !=                             | None          | 7          |
+| Logical AND    | &&                                 | Left          | 6          |
+| Logical Or     | `\|\|`                             | Left          | 5          |
+| If-null        | ??                                 | Left          | 4          |
+| Conditional    | e1 ? e2 : e3                       | Right         | 3          |
+| Cascade        | ..                                 | Left          | 2          |
+| Assignment     | =, *=,  /=, +=, -=, &=, ^=, etc.   | Right         | 1          |
+
+```dart
+void main() {
+  var example = 5;
+  print(++example * 3 == 20 - 2);  // -> true
+}
+```
+
+---
+
+## Delimiters
+
+- `;` (Semicolon): ends statements
+- `\` (Backslash): escape characters
+- `,` (Comma): separates arguments, parameters, and enumerated data
+- `:` (Colon): used in a `Map` to separate key and value
+
+```dart
+var variable = 1;
+String hello = "Hello World!\n";
+var sum = add(1, 2);
+var object = {
+  'key': 'value',
+};
+```
+
+---
+
+## Separators or Brackets
+
+- `()` (Parenthesis): groups expressions, denotes parameters and arguments, control flow
+- `[]` (Square Brackets): create `List` access members of an object, denote optional parameters
+- `{}` (Curly Brackets): mark blocks of code, create `Set` and `Map`, denote optional named parameters, string interpolation
+- `<>` (Angle Brackets): annotate type of generics, can be nested
+- `""` (Double Quotes): String literal, can be interpolated
+- `''` (Single Quotes): String literal, cannot be interpolated
+
+```dart
+var addition = add(3, 4);
+List<int> numbers = [1, 2, 3];
+if (numbers.isNotEmpty) {
+  print("Not empty!");  // -> Not empty!
+}
+```
+
+---
+
+## Text Format
+
+Dart is freely formatted
+
+```dart
+var num = 1; print(num); // -> 1
+```
+
+---
+
+## Appearance for Readability
+
+- Two spaces for indentation per the style guide
+- Ignores whitespace
+- No preference on blank lines
+- `//` (two forward slashes): make the rest of the line after it a comment
+- `/* */` (forward slash and asterisk): multiline comment
+
+```dart
+// This is a comment
+/* This is a 
+  multiline comment */
+```
+
+---
+
+## Punctuation
+
+- `.` (Period): access members of an object
+- `?` (Question Mark): used before period to access member if not null, also signifies variable is nullable
+- `!` (Exclamation Mark): indicates that function will not return null
+- `=>` (Arrow): creates arrow functions
+- `..` (Two Periods): accesses multiple methods consecutively
+- `$` (Dollar Sign): string interpolation
+
+```dart
+void main() {
+  print(1.isOdd); // -> true
+  print("${1..isOdd..isEven}"); // -> 1
+  int? number;
+  var addTwoNum = (int num1, int num2) => num1 + num2;
+  print(addTwoNum!(1, 2)); // -> 3
+}
+```
+
+---
+
+## Words
+
+- Identifiers may start with a letter or underscore, followed by letters, underscores, or numerical digits
+  - Identifiers that start with an underscore are private
+
+---
+
+Below are the keywords in the language.
+
+| Descriptive                |                                                                                |
+|----------------------------|--------------------------------------------------------------------------------|
+| `abstract`                 | abstract class, for interfaces                                                 |
+| `async`                    | marks a function as asynchronous                                               |
+| `class`                    | initializes a class                                                            |
+| `final`                    | declares a variable that is set only once                                      |
+| `const`                    | declares a variable that is a compile-time constant                            |
+| `deferred`                 | lazy loads libraries to reduce startup time                                    |
+| `while`, `do while`, `for` | loops                                                                          |
+| `if`, `else`               | control flow                                                                   |
+| `enum`                     | enumerations                                                                   |
+| `extends`                  | creates a subclass                                                             |
+| `super`                    | lets subclass access superclass                                                |
+| `factory`                  | used for a constructor that does not create an object of the class             |
+| `true`, `false`            | boolean values                                                                 |
+| `get`, `set`               | declares getters and setters in a class                                        |
+| `late`                     | allows for a variable to be non-nullable that is initialized after declaration |
+
+---
+
+| Descriptive                |                                                                                |
+|----------------------------|--------------------------------------------------------------------------------|
+| `mixin`                    | for sharing attributes with other classes                                      |
+| `null`                     | default value of uninitialized variables and its own object type               |
+| `operator`                 | overload operators in a class                                                  |
+| `required`                 | marks required parameters in functions                                         |
+| `static`                   | denotes class-wide variables and methods                                       |
+| `sync`, `async`            | generator functions which produce a series of values                           |
+| `switch`, `case`, `default`            |  switch statement                          |
+| `this`                     | refers to attributes of the specific instance of the object                    |
+| `typedef`                  | type alias                                                                     |
+| `var`                      | declaring variables                                                            |
+| `void`                     | return type signifying nothing is returned                                     |
+
+---
+
+| Action                             |                                                                            |
+|------------------------------------|----------------------------------------------------------------------------|
+| `assert`                           | stops execution when a condition is false, and used for testing            |
+| `await`                            | used in an `async` function, pauses execution until a `Future` is returned |
+| `break`                            | stops loops                                                                |
+| `continue`                         | skips to the next iteration of a loop                                      |
+| `try`, `catch`, `finally`, `throw` | handle exceptions                                                          |
+| `import`                           | accesses a library                                                         |
+| `show`, `hide`                     | uses a portion of a library                                                |
+| `new`                              | constructs an instance of a class                                          |
+| `return`                           | returns data from a function or method                                     |
+| `yield`                            | returns values from a generator function                                   |
+
+---
+
+| Noise |                                           |
+|-------|-------------------------------------------|
+| `as`  | type casting                              |
+| `is`  | returns true if object has the given type |
+| `on`  | handle exceptions in code                 |
+
+---
+
+```dart
+void main(List<String> args) {
+  var _identifier = "";
+
+  print((1 as double).isNaN); // -> false
+
+  assert(true != false);
+
+
+  for (var num in [1, 2, 3]) {
+    if (num == 3) {
+      print(num); // -> 3
+      break;
+    } else {
+      continue;
+    }
+  }
+
+  switch (1) {
+    case 1:
+      print(1); // -> 1
+      break;
+    default:
+      print("Unreachable");
+  }
+
+  try {
+    var api = await fetchApi();
+  } catch(e) {
+    throw "Fetch exception";
+  }
+
+  var sampleObject = new inheritedClass(4);
+
+  while (true) {
+    print(null);
+  }
+
+}
+```
+
+---
+
+```dart
+typedef strList = List<String>;
+
+abstract class exampleClass {}
+
+class inheritedClass extends exampleClass {
+  late int number;
+  static int staticVariable = 2;
+  inheritedClass(this.number);
+
+  factory inheritedClass.num(int num) {
+    return inheritedClass(num + 1);
+  }
+
+  set numSquared(int num) {
+    this.number = num * num;
+  }
+
+  get numAsDouble {
+    return (number as double);
+  }
+}
+
+enum exampleEnum {
+  zero,
+  one,
+}
+```
+
+---
+
+## Statements
+
+- Declaration uses the following keywords
+  - `var`: variable, type inferred upon assignment
+  - `Type`: variable, type explicitly declared
+  - `class`
+  - `function`
+- Assignment occurs with the `=` sign
+  - The language currently does not support destructuring objects
+- Arithmetic statements make use of the operations
+- Input and output is handled by the `dart:io` package
+  - `print()` to output in the command line
+  - `stdout`, `stderr`, and `stdin` are accessible
+  - `stdout.write()` to print to `stdout`
+  - `stdin.readLineSync()` to receive input as a string
+- Control statements have condition in parentheses, then a block in curly brackets to be executed
+  - `if`, `else`, `if else`
+  - `switch`, `break`
+  - `while`, `do while`, `for`
+
+```dart
+import 'dart:io';
+var assign = (stdin.readLineSync() as int);
+if (assign == 1) {
+	print(assign);
+} else if (assign == 2) {
+	assign++;
+}
+```
+
+---
+
+## Subprograms
+
+- Variables are lexically scoped
+  - But no distinction between global and local variables
+- Subprograms are functions and methods
+  - Have the supertype `Function`
+  - May or may not have type annotations to parameters and return value
+  - If there is no return value, it returns `null`
+  - May be passed as arguments to other functions and methods
+  - Functions with one expression can be written with the arrow syntax
+  - Anonymous functions do not have an identifier, only a list of parameters
+  - Parameters may be required, optional, named, and positional
+- Programs must have one top-level `main()` function that returns `void`
+- Subprograms are defined in Dart's core libraries
+  - Importable through `import`
+  - `dart:async`: asynchronous programming
+  - `dart:core`: types, collections, other standard features
+  - `dart:math`: mathematical operations
+  - `dart:io`: access files and streams
+
+---
+
+```dart
+void main(List<String> args) {
+  var total = sumOfNumbers(1, 2);
+  {
+    var newTotal = total + 1;
+  }
+  print(newTotal);  // -> Undefined
+}
+
+int sumOfNumbers(int num1, int num2, [int num3 = 0]) => num1 + num2 + num3;
+
+void greet(String greeting, {required String firstName, required String lastName}) {
+  print("$greeting, $firstName $lastName!");
+}
+```
+
+---
+
+## Program Abstraction
+
+- Modules can be imported through `import`
+  - Packages can be downloaded from [Pub](pub.dev) or `dart pub add` in the command line
+- Variables can be made private by making the first character of the identifier an underscore
+  - Private variables can be accessed within the same library and all other classes within that library
+
+```dart
+import 'dart:io';
+import 'utils.dart';
+
+var _privateVariable = 1;
+```
+
+---
+
+## Self-Documenting Features
+
+- Dart's comprehensive toolset strongly enforces the use of its style and formatting
+- Its SDK contains modern features
+  - code actions
+  - formatter
+  - linter
+  - supported by several code editors
+
+```dart
+class UpperCamelCase {}
+
+void main(List<String> args) {
+  var lowerCamelCase = 1;
+  if (true) {
+    print("Use curly braces for control flow statements.");
+  }
+}
+```
