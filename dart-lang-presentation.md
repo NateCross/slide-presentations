@@ -224,6 +224,8 @@ Everything in Dart is an object, i.e. they implement the `Object` class. The onl
 
 The language is soundly typed through static type and runtime checks. Thus, a variable can never be a type it was not annotated or inferred to be.
 
+---
+
 ### Built-in
 
 - Numbers: `int` (integers) and `double` (double-precision floating point)
@@ -235,6 +237,8 @@ The language is soundly typed through static type and runtime checks. Thus, a va
 - Values accessed through the `.` (dot) operator
 - Dart 2.17: Introduced enhanced enums
   - Supports fields, methods, and constructors like classes
+
+---
 
 ```dart
 var number = 1.5;
@@ -344,6 +348,8 @@ class Example implements ExampleContainer {
 - `Stream` is returned when a `File` is read
   - Can read a `File` line by line
   - Can be written and appended to
+
+---
 
 ```dart
 File myFile = File('hello.txt');
@@ -808,3 +814,212 @@ void main(List<String> args) {
   }
 }
 ```
+
+---
+
+# Control-Level Structures
+
+## Expressions
+
+- Evaluating an expression either produces an object or throws an exception
+- Arithmetic and boolean expressions invoke their respective arithmetic operators on objects
+- Boolean expressions must evaluate to a `bool`
+
+```dart
+int num1 = 1, num2 = 2;
+double num3 = 3.5;
+print(num1 + num2); // -> 3
+print(num1 + num3); // -> 4.5 (double)
+
+if (false && true) {
+  print("Unreachable");
+} else {
+  print("False!"); // -> False!
+}
+```
+
+---
+
+## Control Statements
+
+### Unconditional Branch
+
+- Labels can be used as targets for `break` and `continue`
+
+```dart
+first: for (int i = 0; i <= 9; i++) {
+  second: for (int j = 9; j >= 0; j--) {
+    if (j % 3 == 0) {
+      continue second;
+    } else if (j % 5 == 0) {
+      continue first;
+    }
+    print("$i $j"); // -> 0 8; 0 7; 1 8; 1 7; ...
+  }
+}
+```
+
+---
+
+### Selection
+
+- `if` and `else` perform two-way selection
+- Chained `if` and `else` can perform multi-way selection
+- `switch` can also do multi-way selection
+
+```dart
+if (true) {
+  print("This is true!"); // -> This is true!
+} else {
+  print("This is false.");
+}
+
+switch (1) {
+  case 1:
+    print("1"); // -> 1
+    break;
+  default:
+    print("This is default");
+    break;
+}
+```
+
+---
+
+### Iteration
+
+- `while`: conditionally iterate, test before
+- `do while`: conditionally iterate, test after
+- `for`: indexed iteration
+- `for in`: iterate over an iterable
+
+---
+
+```dart
+for(int i = 1; i <= 10; i++) {
+  print(i); // -> 1; 2; 3; 4; 5; ...
+}
+
+for (var i in [1, 2, 3, 4, 5]) {
+  print(i); // -> 1; 2; 3; 4; 5
+}
+
+var counter = 1;
+while(counter <= 10) {
+  print(counter); // -> 1; 2; 3; 4; 5; ...
+  counter++;
+}
+
+do {
+  print(counter); // -> 11; 10; 9; 8; 7; ...
+  counter--;
+} while (counter >= 1);
+```
+
+---
+
+### Control over Program Execution
+
+- `try`-`catch`-`finally` checks for execution errors
+
+```dart
+try {
+  var api = await fetchApi();
+} on NoApiException {
+  print("No API fetched.");
+} catch(e) {
+  print("Caught unknown exception: $e");
+} finally {
+  cleanupApi();
+}
+```
+
+---
+
+
+## Subprogram Control Structures
+
+### Simple Call/Return
+
+- Functions and methods are the subprograms
+- Declared with an identifier, followed by the signature and body
+- May include a return type
+- If they do not return anything, they return `null`
+- `getters` in a class do not contain parameters
+
+```dart
+String makeGreeting(String firstName, String lastName) {
+  return "Hello, $firstName $lastName!";
+}
+```
+
+---
+
+### Recursion
+
+- Recursion works by calling the subprogram within itself
+- Evaluated like a stack
+
+```dart
+int fibonacci(int num) {
+  if (num <= 1) return num;
+  return (fibonacci(num - 1) + fibonacci(num - 2));
+}
+```
+
+---
+
+### Implicit Call
+
+- An example of this is a constructor method to create an instance of a class
+
+```dart
+class Greeter {
+  String firstName;
+  String lastName;
+
+  Greeter(this.firstName, this.lastName);
+
+  void greet() {
+    print("Hello, $firstName $lastName!");
+  }
+}
+```
+
+---
+
+### Parallel Processes
+
+- `Stream` from the `dart:async` library allows a process to run in parallel
+- Dart takes advantage of multi-core CPUs to run code in **isolates** which are their own memory heap
+  - Removes the need for mutexes and semaphores
+
+```dart
+Future<int> totalStream(Stream<int> stream) async {
+  int total = 0;
+  await for (var num in stream) {
+    total += num;
+  }
+  return total;
+}
+```
+
+---
+
+### Coroutines
+
+- Declaring a function to be `async` allows the use of `await` which handles execution asynchronously until the data of a `Future` is received
+  - A `Future` is a promise to return data, similar to `Promises` in JavaScript
+
+```dart
+Future<String> fetchGreeting(String firstName, String lastName) {
+  return Future.delayed(
+    const Duration(seconds: 2),
+    () => "Hello, $firstName $lastName!",
+  );
+}
+```
+
+---
+
+# End of Presentation
