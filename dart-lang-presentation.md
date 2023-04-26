@@ -265,7 +265,7 @@ example.up; // -> example.up
 - `Set` is like `list` but each element is unordered and unique
 - `Map` stores data in key-value pairs
   - Similar to dictionaries and associative arrays
-  - Can serve as trees and graphs
+  - Can serve as records, trees, and graphs
 - `List`, `Map`, and `Set` are iterables
 
 ```dart
